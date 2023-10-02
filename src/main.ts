@@ -6,6 +6,23 @@ import {apiUrl, uploadUrl} from './variables';
 
 // PWA code
 
+console.log(pwaInfo);
+
+const updateSW = registerSW({
+  immediate: true,
+  onNeedRefresh() {
+    console.log('onNeedRefresh');
+    const update = confirm('New version available. Update?');
+    if (update) {
+      updateSW(true);
+    }
+  },
+  onOfflineReady() {
+    console.log('onOfflineReady');
+    alert('App is offline ready');
+  },
+});
+
 // select forms from the DOM
 const loginForm = document.querySelector('#login-form');
 const profileForm = document.querySelector('#profile-form');
